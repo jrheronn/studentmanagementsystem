@@ -2,8 +2,8 @@ package assignment02;
 
 // Class for a student node of the singly-linked list
 public class StudentNode {
-    Student student;
-    StudentNode next;
+    private Student student;
+    private StudentNode next;
 
     // Construtor to access class StudentNode
     public StudentNode(Student student) {
