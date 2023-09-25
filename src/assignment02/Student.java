@@ -1,5 +1,6 @@
 package assignment02;
 
+// Class to represent student info
 public class Student {
     String name;
     String studentID;
