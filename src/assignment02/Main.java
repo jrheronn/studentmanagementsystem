@@ -1,17 +1,14 @@
 package assignment02;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        DataReader dataReader = new DataReader("inputFile_1.txt");
+        CourseDoublyLinkedList courseList = new CourseDoublyLinkedList();
+        StudentSinglyLinkedList studentList = new StudentSinglyLinkedList();
 
-        ArrayList<Course> course = new ArrayList<>();
-        ArrayList<Student> students = new ArrayList<>();
-
-        boolean inputFile = false;
+        boolean fileInputed = false;
 
         while (true) {
             System.out.println("CS 3353 Assignment 2 Main Menu:");
@@ -30,37 +27,48 @@ public class Main {
 
             switch (option) {
                 case 1:
-                    try {
-                        course = dataReader.readCourses();
-                        students = dataReader.readStudents();
-                        inputFile = true;
-                        System.out.println("Data loaded");
-                    } catch (IOException e) {
-                        System.out.println("Error from input file");
+                    // Read the input data
+                    if (!fileInputed) {
+                        DataReader dataReader = new DataReader("inputFile_1.txt");
+                        dataReader.readData(courseList, studentList);
+                        fileInputed = true;
+                        System.out.println("File data loaded");
+                    } else {
+                        System.out.println("File already loaded");
                     }
                     break;
 
                 case 2:
+                    // Delete a course
                     break;
 
                 case 3:
+                    // Insert a new course
                     break;
 
                 case 4:
-
+                    // Delete a student
                     break;
 
                 case 5:
+                    // Insert a new student
                     break;
 
                 case 6:
-
+                    // Transfer a student from one course to another
                     break;
 
                 case 7:
+                    // Display Course List
+                    if (fileInputed) {
+                        courseList.displayCourseList();
+                    } else {
+                        System.out.println("File has not been loaded");
+                    }
                     break;
 
                 case 8:
+                    // Display Student List
                     break;
 
                 case 9:
