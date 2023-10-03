@@ -4,5 +4,19 @@ package assignment02;
 public class StudentSinglyLinkedList {
     private StudentNode head;
 
-    //Add Insert
+    public void addStudent(Student student) {
+        StudentNode newNode = new StudentNode(student);
+
+        // If list is empty
+        if (head == null) {
+            head = newNode;
+        } else {
+            StudentNode current = head;
+            while (current.getNext() != null) {
+                current = current.getNext();
+            }
+            current.setNext(newNode);
+        }
+
+    }
 }
