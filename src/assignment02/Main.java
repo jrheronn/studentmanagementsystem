@@ -1,9 +1,17 @@
 package assignment02;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        DataReader dataReader = new DataReader("inputFile_1.txt");
+
+        ArrayList<Course> course = new ArrayList<>();
+        ArrayList<Student> students = new ArrayList<>();
+
+        boolean inputFile = false;
 
         while (true) {
             System.out.println("CS 3353 Assignment 2 Main Menu:");
@@ -22,6 +30,14 @@ public class Main {
 
             switch (option) {
                 case 1:
+                    try {
+                        course = dataReader.readCourses();
+                        students = dataReader.readStudents();
+                        inputFile = true;
+                        System.out.println("Data loaded");
+                    } catch (IOException e) {
+                        System.out.println("Error from input file");
+                    }
                     break;
 
                 case 2:
@@ -48,6 +64,8 @@ public class Main {
                     break;
 
                 case 9:
+                    System.out.println("Exiting");
+                    System.exit(0);
                     break;
 
                 default:
