@@ -10,4 +10,16 @@ public class StudentNode {
         this.student = student;
         this.next = null;
     }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public StudentNode getNext() {
+        return next;
+    }
+
+    public void setNext(StudentNode next) {
+        this.next = next;
+    }
 }
