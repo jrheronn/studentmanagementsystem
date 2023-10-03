@@ -17,4 +17,19 @@ public class Course {
         this.next = null;
         this.studentLinkedList = new StudentSinglyLinkedList();
     }
+
+    public String getCourseNumber() {
+        return courseNumber;
+    }
+
+    public void setCourseNumber(String courseNumber) {
+        this.courseNumber = getCourseNumber();
+    }
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
 }
