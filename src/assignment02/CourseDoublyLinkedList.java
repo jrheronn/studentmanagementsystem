@@ -1,6 +1,6 @@
 package assignment02;
 
-public class CourseDoublyLInkedList {
+public class CourseDoublyLinkedList {
     private Course head;
 
     // Add insert
