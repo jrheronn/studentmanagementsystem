@@ -1,8 +1,8 @@
 package assignment02;
 
 public class CourseDoublyLinkedList {
-    private Course head;
-
+    private CourseNode head;
+    private CourseNode tail;
     // Add insert
     public void insert(Course course) {
 
