@@ -61,17 +61,41 @@ public class Header {
     }
 
     public void addCourse(Courses course) {
-        if(course == null) {
-            return;
-        }
-        if (head == null) {
-            head = course;
-            tail = course;
+        // Check for same course number
+        Courses existingCourse = getCourse(course.getCourseNumber());
+
+        if(existingCourse != null) {
+            // update student count if course exist
+            existingCourse.incrementStudentCount();
         } else {
-            tail.setNext(course);
-            course.setPrevious(tail);
-            tail = course;
+            // Add new course to list
+            if (head == null) {
+                // Create list if empty
+                head = course;
+                tail = course;
+            } else {
+                // Add course to the end of the list
+                tail.setNext(course);
+                course.setPrevious(tail);
+                tail = course;
+            }
+            courseCount++;
         }
-        courseCount++;
     }
+
+    // Method for case 8 to display the course list
+    public void displayCourseList() {
+        Courses currentCourse = head;
+
+        System.out.println("The list of courses registered are as follows:");
+        while (currentCourse != null) {
+            System.out.println("Course Number " + currentCourse.getCourseNumber());
+            System.out.println("Course Name " + currentCourse.getCourseName());
+            System.out.println("Number of students enrolled: " + currentCourse.getStudentCount());
+            System.out.println();
+
+            currentCourse = currentCourse.getNext();
+        }
+    }
+
 }

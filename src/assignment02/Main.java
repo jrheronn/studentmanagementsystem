@@ -57,7 +57,7 @@ public class Main {
                 case 7:
                     // Display Course List
                     if (fileInputted) {
-                        displayCourseList(header);
+                        header.displayCourseList();
                     } else {
                         System.out.println("Input file data first");
                     }
@@ -66,6 +66,11 @@ public class Main {
 
                 case 8:
                     // Display Student List
+                    if (fileInputted) {
+                        //header.displayStudentList();
+                    } else {
+                        System.out.println("Input file data first");
+                    }
                     break;
 
                 case 9:
@@ -78,24 +83,6 @@ public class Main {
 
 
             }
-        }
-    }
-
-    private static void displayCourseList(Header header) {
-        Courses currentCourse = header.getHead();
-        if (currentCourse == null) {
-            System.out.println("No courses");
-            return;
-        }
-
-        System.out.println("The list of courses registered are as follows:");
-        while (currentCourse != null) {
-            System.out.println("Course Number " + currentCourse.getCourseNumber());
-            System.out.println("Course Name " + currentCourse.getCourseName());
-            System.out.println("Number of students enrolled: " + currentCourse.getStudentCount());
-            System.out.println();
-
-            currentCourse = currentCourse.getNext();
         }
     }
 
@@ -127,17 +114,20 @@ public class Main {
                     Courses currentCourse = header.getCourse(courseNumber);
 
                     if (currentCourse == null) {
-                        currentCourse = new Courses(courseNumber, courseName, 0);
+                        currentCourse = new Courses(courseName, courseNumber, 0);
                         header.addCourse(currentCourse);
                     }
 
                     Students student = new Students(studentName, studentID, email, address);
-                    currentCourse.addStudent(student);
+                    currentCourse.addStudent(header, student);
+
+                    // Increment student count for the current course
+                    currentCourse.incrementStudentCount();
 
                 }
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Error inputting file");
         }
         return header;
     }

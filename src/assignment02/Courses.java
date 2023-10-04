@@ -65,7 +65,7 @@ public class Courses {
         this.studentList = studentList;
     }
 
-    public void addStudent(Students student) {
+    public void addStudent(Header header, Students student) {
         if (student == null) {
             return;
         }
@@ -73,15 +73,19 @@ public class Courses {
             // Create list if list is empty
             studentList = student;
         } else {
-            // Add student to existing list
+            // Find last node
             Students currentStudent = studentList;
             while(currentStudent.getNext() != null) {
                 currentStudent = currentStudent.getNext();
             }
+            // Add new student to list
             currentStudent.setNext(student);
         }
         // Increment student count for course
         studentCount++;
+
+        // Increment total student count
+        header.incrementTotalStudentCount();
     }
 
     public void incrementStudentCount() {
