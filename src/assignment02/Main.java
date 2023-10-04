@@ -30,6 +30,7 @@ public class Main {
                 case 1:
                     // Read the input data
                     header = readInputFile();
+                    fileInputted = true;
                     displayHeaderSummary(header);
                     break;
 
@@ -55,6 +56,12 @@ public class Main {
 
                 case 7:
                     // Display Course List
+                    if (fileInputted) {
+                        displayCourseList(header);
+                    } else {
+                        System.out.println("Input file data first");
+                    }
+
                     break;
 
                 case 8:
@@ -74,15 +81,40 @@ public class Main {
         }
     }
 
+    private static void displayCourseList(Header header) {
+        Courses currentCourse = header.getHead();
+        if (currentCourse == null) {
+            System.out.println("No courses");
+            return;
+        }
+
+        System.out.println("The list of courses registered are as follows:");
+        while (currentCourse != null) {
+            System.out.println("Course Number " + currentCourse.getCourseNumber());
+            System.out.println("Course Name " + currentCourse.getCourseName());
+            System.out.println("Number of students enrolled: " + currentCourse.getStudentCount());
+            System.out.println();
+
+            currentCourse = currentCourse.getNext();
+        }
+    }
+
     private static Header readInputFile() {
         Header header = new Header();
 
-        try (BufferedReader reader = new BufferedReader(new FileReader("inputFile_1.txt"))) {
+        try (BufferedReader fileReader = new BufferedReader(new FileReader("inputFile_1.txt"))) {
             String line;
-            Courses currentCourse = null;
+            boolean firstline = true;
 
-            while ((line = reader.readLine()) != null) {
-                String[] categories = line.split("t");
+            while ((line = fileReader.readLine()) != null) {
+                // Skip the first line of inputFile_1.txt
+                if (firstline) {
+                    firstline = false;
+                    continue;
+                }
+
+                // Split line data with tabs
+                String[] categories = line.split("\t");
 
                 if (categories.length == 6) {
                     String courseNumber = categories[0];
@@ -92,30 +124,20 @@ public class Main {
                     String email = categories[4];
                     String address = categories[5];
 
-                    // Create student
-                    Students student = new Students(studentName, studentID, email, address);
+                    Courses currentCourse = header.getCourse(courseNumber);
 
-
-                    // Check if the course exist already
-                    Courses existingCourse = header.getCourse(courseNumber);
-                    if (existingCourse == null) {
-                        // Create the course and set student count to 1
-                        Courses newCourse = new Courses(courseName, courseNumber, 1);
-                        newCourse.setStudentList(student);
-
-                        // Add course to the header
-                        header.getCourse(String.valueOf(newCourse));
-                    } else {
-                        // Student added to existing course
-                        existingCourse.addStudent(student);
+                    if (currentCourse == null) {
+                        currentCourse = new Courses(courseNumber, courseName, 0);
+                        header.addCourse(currentCourse);
                     }
-                    // Increment the counts
-                    header.incrementTotalStudentCount();
-                    header.incrementCourseCount(courseNumber);
+
+                    Students student = new Students(studentName, studentID, email, address);
+                    currentCourse.addStudent(student);
+
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error inputting file");
+            e.printStackTrace();
         }
         return header;
     }

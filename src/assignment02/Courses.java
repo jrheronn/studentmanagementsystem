@@ -66,7 +66,21 @@ public class Courses {
     }
 
     public void addStudent(Students student) {
-        studentList.add(student);
+        if (student == null) {
+            return;
+        }
+        if (studentList == null) {
+            // Create list if list is empty
+            studentList = student;
+        } else {
+            // Add student to existing list
+            Students currentStudent = studentList;
+            while(currentStudent.getNext() != null) {
+                currentStudent = currentStudent.getNext();
+            }
+            currentStudent.setNext(student);
+        }
+        // Increment student count for course
         studentCount++;
     }
 

@@ -59,4 +59,19 @@ public class Header {
             currentCourse = currentCourse.getNext();
         }
     }
+
+    public void addCourse(Courses course) {
+        if(course == null) {
+            return;
+        }
+        if (head == null) {
+            head = course;
+            tail = course;
+        } else {
+            tail.setNext(course);
+            course.setPrevious(tail);
+            tail = course;
+        }
+        courseCount++;
+    }
 }
