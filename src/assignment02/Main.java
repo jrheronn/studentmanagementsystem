@@ -67,7 +67,9 @@ public class Main {
                 case 8:
                     // Display Student List
                     if (fileInputted) {
-                        //header.displayStudentList();
+                        System.out.print("Enter the course number: ");
+                        String courseNumber = scanner.next();
+                        header.displayStudentList(courseNumber);
                     } else {
                         System.out.println("Input file data first");
                     }
