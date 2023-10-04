@@ -1,11 +1,13 @@
 package assignment02;
 
+import java.util.LinkedList;
+
 // Header class for Course doubly linked list
 public class Header {
     private int courseCount;
     private int totalStudentCount;
-    private Course head;
-    private Course tail;
+    private Courses head;
+    private Courses tail;
 
     public Header() {
         this.courseCount = 0;
@@ -19,31 +21,42 @@ public class Header {
         return courseCount;
     }
 
-    public void setCourseCount(int courseCount) {
-        this.courseCount = courseCount;
-    }
-
     public int getTotalStudentCount() {
         return totalStudentCount;
     }
 
-    public void setTotalStudentCount(int totalStudentCount) {
-        this.totalStudentCount = totalStudentCount;
-    }
-
-    public Course getHead() {
+    public Courses getHead() {
         return head;
     }
 
-    public void setHead(Course head) {
-        this.head = head;
-    }
-
-    public Course getTail() {
+    public Courses getTail() {
         return tail;
     }
 
-    public void setTail(Course tail) {
-        this.tail = tail;
+    public Courses getCourse(String courseNumber) {
+        Courses currentCourse = head;
+        while (currentCourse != null) {
+            if (currentCourse.getCourseNumber().equals(courseNumber)) {
+                return currentCourse; // Course exist
+            }
+            currentCourse = currentCourse.getNext();
+        }
+        return null; // course does not exist
+    }
+
+    public void incrementTotalStudentCount() {
+        totalStudentCount++;
+    }
+
+    public void incrementCourseCount(String courseNumber) {
+        Courses currentCourse = head;
+
+        while (currentCourse != null) {
+            if (currentCourse.getCourseNumber().equals(courseNumber)) {
+                currentCourse.incrementStudentCount();
+                return;
+            }
+            currentCourse = currentCourse.getNext();
+        }
     }
 }
