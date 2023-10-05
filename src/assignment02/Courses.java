@@ -65,7 +65,7 @@ public class Courses {
         this.studentList = studentList;
     }
 
-    public void addStudent(Header header, Students student) {
+    public void addStudentReader(Header header, Students student) {
         if (student == null) {
             return;
         }
@@ -110,5 +110,19 @@ public class Courses {
             current = current.getNext();
         }
         return false; // Student ID not found
+    }
+
+    public void addStudent(Students student) {
+        if (student == null) {
+            // Create student list if this is the first student
+            studentList = student;
+        } else {
+            // Else, add student to the existing list
+            Students currentStudent = studentList;
+            while (currentStudent.getNext() != null) {
+                currentStudent = currentStudent.getNext();
+            }
+            currentStudent.setNext(student);
+        }
     }
 }

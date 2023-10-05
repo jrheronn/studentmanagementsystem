@@ -26,6 +26,7 @@ public class Main {
             System.out.print("Enter your option: ");
 
             option = scanner.nextInt();
+            scanner.nextLine();
 
             switch (option) {
                 case 1:
@@ -38,58 +39,92 @@ public class Main {
                 case 2:
                     // Delete a course
                     if (fileInputted) {
-                        System.out.print("Enter the course number to delete: ");
-                        String courseNumber = scanner.next(); // Get inputted course number
-                        header.deleteCourse(courseNumber);
-                        displayHeaderSummary(header); // Display updated summary
-                    } else {
                         System.out.println("Input file data first");
+                        break;
                     }
+                    System.out.print("Enter the course number to delete: ");
+                    String deleteCourseNumber = scanner.next(); // Get inputted course number
+                    header.deleteCourse(deleteCourseNumber);
+                    displayHeaderSummary(header); // Display updated summary
                     break;
 
                 case 3:
                     // Insert a new course
-                    if (fileInputted) {
-                        System.out.print("Enter the new course number to add: ");
-                        String courseNumber = scanner.nextLine();
+                    if (!fileInputted) {
+                        System.out.println("Input file data first");
+                        break;
+                    }
+                    System.out.print("Enter the new course number to add: ");
+                    String newCourseNumber = scanner.nextLine();
 
-                        if (!courseNumber.isEmpty()) {
-                            System.out.print("Enter the new course name for " + courseNumber + ":");
-                            String courseName = scanner.nextLine(); // Get inputted course name
+                    if (!newCourseNumber.isEmpty()) {
+                        System.out.print("Enter the new course name for " + newCourseNumber + ":");
+                        String newCourseName = scanner.nextLine(); // Get inputted course name
 
-                            header.insertCourse(courseNumber, courseName);
+                        if(!newCourseName.isEmpty()) {
+                            assert header != null;
+                            header.insertCourse(newCourseNumber, newCourseName);
                             displayHeaderSummary(header); // Display updated summary
                         } else {
-                            System.out.println("Course number must be entered");
+                            System.out.println("Course name must not be empty");
                         }
                     } else {
-                        System.out.println("Input file data first");
+                        System.out.println("Course number must be entered");
                     }
                     break;
 
                 case 4:
                     // Delete a student
-                    if (fileInputted) {
-                        System.out.print("Enter the student ID number to delete: ");
-                        String studentID = scanner.nextLine();
-
-                        System.out.print("Enter the course number from which the student is the be dropped from: ");
-                        String courseNumber = scanner.nextLine();
-
-                        boolean studentDeleted = header.deleteStudent(courseNumber, studentID);
-
-                        if (studentDeleted) {
-                            displayHeaderSummary(header);
-                        } else {
-                            System.out.println("Cannot locate student");
-                        }
-                    } else {
+                    if (!fileInputted) {
                         System.out.println("Input file data first");
+                        break;
                     }
+
+                    System.out.print("Enter the student ID number to delete: ");
+                    String studentID = scanner.nextLine();
+
+                    System.out.print("Enter the course number from which the student is the be dropped from: ");
+                    String courseNumber = scanner.nextLine();
+
+                    boolean studentDeleted = header.deleteStudent(courseNumber, studentID);
+
+                    if (studentDeleted) {
+                        displayHeaderSummary(header);
+                    } else {
+                        System.out.println("Cannot locate student");
+                    }
+
                     break;
 
                 case 5:
                     // Insert a new student
+                    if (!fileInputted) {
+                        System.out.println("Input file data first");
+                        break;
+                    }
+                    // Get course number to enroll student
+                    System.out.print("Enter the course number the student wants to enroll to: ");
+                    String courseNumberToEnroll = scanner.nextLine();
+
+                    // Check if the course exist
+                    if (header.getCourse(courseNumberToEnroll) != null) {
+                        // Get the student's information
+                        System.out.print("Enter the student's name: ");
+                        String studentNameEnroll = scanner.nextLine();
+                        System.out.print("Enter the student's ID: ");
+                        String studentIDEnroll = scanner.nextLine();
+                        System.out.print("Enter the student's email");
+                        String studentEmailEnroll = scanner.nextLine();
+                        System.out.print("Enter the student's emergency contact address: ");
+                        String studentAddressEnroll = scanner.nextLine();
+
+                        //Add the student to course
+                        header.addStudentToCourse(courseNumberToEnroll, studentNameEnroll, studentIDEnroll, studentEmailEnroll, studentAddressEnroll);
+
+                        // Display updated summary
+                        displayHeaderSummary(header);
+                    }
+
                     break;
 
                 case 6:
@@ -98,22 +133,22 @@ public class Main {
 
                 case 7:
                     // Display Course List
-                    if (fileInputted) {
-                        header.displayCourseList();
-                    } else {
+                    if (!fileInputted) {
                         System.out.println("Input file data first");
+                        break;
                     }
+                    header.displayCourseList();
                     break;
 
                 case 8:
                     // Display Student List
-                    if (fileInputted) {
-                        System.out.print("Enter the course number: ");
-                        String courseNumber = scanner.next();
-                        header.displayStudentList(courseNumber);
-                    } else {
+                    if (!fileInputted) {
                         System.out.println("Input file data first");
+                        break;
                     }
+                    System.out.print("Enter the course number: ");
+                    String courseNumberStudentList = scanner.next();
+                    header.displayStudentList(courseNumberStudentList);
                     break;
 
                 case 9:
@@ -162,7 +197,7 @@ public class Main {
                     }
 
                     Students student = new Students(studentName, studentID, email, address);
-                    currentCourse.addStudent(header, student);
+                    currentCourse.addStudentReader(header, student);
 
                     // Increment student count for the current course
                     currentCourse.incrementStudentCount();

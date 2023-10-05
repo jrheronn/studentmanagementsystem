@@ -159,4 +159,25 @@ public class Header {
         }
         return false;
     }
+
+    public void addStudentToCourse(String courseNumberToEnroll, String studentNameEnroll, String studentIDEnroll, String studentEmailEnroll, String studentAddressEnroll) {
+        // Locate course
+        Courses course = getCourse(courseNumberToEnroll);
+
+        // If the course exist
+        if (course != null) {
+            // Create new Student
+            Students student = new Students(studentNameEnroll, studentIDEnroll, studentEmailEnroll, studentAddressEnroll);
+
+            // Add the student to the course's student list
+            course.addStudent(student);
+
+            course.incrementStudentCount();
+
+            totalStudentCount++;
+        } else {
+            System.out.println("Course not found");
+        }
+
+    }
 }
