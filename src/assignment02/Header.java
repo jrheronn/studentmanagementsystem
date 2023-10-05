@@ -48,16 +48,8 @@ public class Header {
         totalStudentCount++;
     }
 
-    public void incrementCourseCount(String courseNumber) {
-        Courses currentCourse = head;
-
-        while (currentCourse != null) {
-            if (currentCourse.getCourseNumber().equals(courseNumber)) {
-                currentCourse.incrementStudentCount();
-                return;
-            }
-            currentCourse = currentCourse.getNext();
-        }
+    public void incrementCourseCount() {
+        courseCount++;
     }
 
     public void addCourse(Courses course) {
@@ -141,5 +133,19 @@ public class Header {
 
     private void decrementCourseCount() {
         courseCount--;
+    }
+
+    public void insertCourse(String courseNumber, String courseName) {
+        Courses course = new Courses(courseNumber, courseName, 0);
+
+        if (head != null) {
+            tail.setNext(course);
+            course.setPrevious(tail);
+            tail = course;
+        }
+        // Increment the course count
+        incrementCourseCount();
+
+
     }
 }

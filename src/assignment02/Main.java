@@ -11,7 +11,8 @@ public class Main {
 
         boolean fileInputted = false;
 
-        while (true) {
+        int option;
+        do {
             System.out.println("CS3353 Assignment 2 Main Menu:");
             System.out.println("1. Read the input data");
             System.out.println("2. Delete a course");
@@ -24,7 +25,7 @@ public class Main {
             System.out.println("9. Exit");
             System.out.print("Enter your option: ");
 
-            int option = scanner.nextInt();
+            option = scanner.nextInt();
 
             switch (option) {
                 case 1:
@@ -38,7 +39,7 @@ public class Main {
                     // Delete a course
                     if (fileInputted) {
                         System.out.print("Enter the course number to delete: ");
-                        String courseNumber = scanner.next(); //
+                        String courseNumber = scanner.next(); // Get inputted course number
                         header.deleteCourse(courseNumber);
                         displayHeaderSummary(header); // Display updated summary
                     } else {
@@ -48,10 +49,29 @@ public class Main {
 
                 case 3:
                     // Insert a new course
+                    if (fileInputted) {
+                        System.out.print("Enter the new course number to add: ");
+                        String courseNumber = scanner.nextLine();
+
+                        if (!courseNumber.isEmpty()) {
+                            System.out.print("Enter the new course name for " + courseNumber + ":");
+                            String courseName = scanner.nextLine(); // Get inputted course name
+
+                            header.insertCourse(courseNumber, courseName);
+                            displayHeaderSummary(header); // Display updated summary
+                        } else {
+                            System.out.println("Course number must be entered");
+                        }
+                    } else {
+                        System.out.println("Input file data first");
+                    }
                     break;
 
                 case 4:
                     // Delete a student
+                    if (fileInputted) {
+                        System.out.
+                    }
                     break;
 
                 case 5:
@@ -92,7 +112,7 @@ public class Main {
 
 
             }
-        }
+        } while (option != 9);
     }
 
     private static Header readInputFile() {
@@ -113,7 +133,7 @@ public class Main {
                 String[] categories = line.split("\t");
 
                 if (categories.length == 6) {
-                    String courseNumber = categories[0].replaceAll("\\s", "");
+                    String courseNumber = categories[0].replaceAll("\\s", ""); // Remove space in course number
                     String courseName = categories[1];
                     String studentName = categories[2];
                     String studentID = categories[3];
