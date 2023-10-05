@@ -13,6 +13,7 @@ public class Main {
 
         int option;
         do {
+            // Print the menu options
             System.out.println("CS3353 Assignment 2 Main Menu:");
             System.out.println("1. Read the input data");
             System.out.println("2. Delete a course");
@@ -25,6 +26,7 @@ public class Main {
             System.out.println("9. Exit");
             System.out.print("Enter your option: ");
 
+            // Get user input
             option = scanner.nextInt();
             scanner.nextLine();
 
@@ -61,7 +63,7 @@ public class Main {
                         System.out.print("Enter the new course name for " + newCourseNumber + ":");
                         String newCourseName = scanner.nextLine(); // Get inputted course name
 
-                        if(!newCourseName.isEmpty()) {
+                        if (!newCourseName.isEmpty()) {
                             assert header != null;
                             header.insertCourse(newCourseNumber, newCourseName);
                             displayHeaderSummary(header); // Display updated summary
@@ -129,6 +131,48 @@ public class Main {
 
                 case 6:
                     // Transfer a student from one course to another
+                    if (!fileInputted) {
+                        System.out.println("Input file data first");
+                        break;
+                    }
+                    // Ask for student's name
+                    System.out.print("Enter the student's name:");
+                    String studentName = scanner.nextLine();
+
+                    // Ask for the course to drop
+                    System.out.print("Enter the course number the student wants to drop from:");
+                    String droppedCourseNumber = scanner.nextLine();
+                    // Find the course from the course number
+                    Courses droppedCourse = header.getCourse(droppedCourseNumber);
+
+                    if (droppedCourse != null) {
+                        // Locate the student in the dropped course
+                        Students transferStudent = droppedCourse.findStudentName(studentName);
+
+                        if (transferStudent != null) {
+                            // Ask for the course to add
+                            System.out.print("Enter the course number the student wants to enroll in:");
+                            String addedCourseNumber = scanner.nextLine();
+
+                            Courses addedCourse = header.getCourse(addedCourseNumber);
+
+                            if (addedCourse != null) {
+                                // Remove student from the dropped course
+                                droppedCourse.removeStudent(String.valueOf(transferStudent));
+                                // Add student to new course
+                                addedCourse.addStudent(transferStudent);
+
+                                // Display updated header summary information
+                                displayHeaderSummary(header);
+                            } else {
+                                System.out.println("New course not found");
+                            }
+                        } else {
+                            System.out.println("Student not found in the dropped course");
+                        }
+                    } else {
+                        System.out.println("Dropped course not found");
+                    }
                     break;
 
                 case 7:

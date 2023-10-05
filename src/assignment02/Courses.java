@@ -125,4 +125,17 @@ public class Courses {
             currentStudent.setNext(student);
         }
     }
+
+    public Students findStudentName(String studentName) {
+        Students student = studentList;
+
+        while (student != null) {
+            if (student.getStudentName().equalsIgnoreCase(studentName)) {
+                // Look if student's name matches
+                return student;
+            }
+            student = student.getNext();
+        }
+        return null; // Student not found
+    }
 }
