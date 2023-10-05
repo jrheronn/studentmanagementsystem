@@ -32,7 +32,7 @@ public class Main {
                     // Read the input data
                     header = readInputFile();
                     fileInputted = true;
-                    displayHeaderSummary(header); // Display header summary
+                    displayHeaderSummary(); // Display header summary
                     break;
 
                 case 2:
@@ -41,7 +41,7 @@ public class Main {
                         System.out.print("Enter the course number to delete: ");
                         String courseNumber = scanner.next(); // Get inputted course number
                         header.deleteCourse(courseNumber);
-                        displayHeaderSummary(header); // Display updated summary
+                        displayHeaderSummary(); // Display updated summary
                     } else {
                         System.out.println("Input file data first");
                     }
@@ -58,7 +58,7 @@ public class Main {
                             String courseName = scanner.nextLine(); // Get inputted course name
 
                             header.insertCourse(courseNumber, courseName);
-                            displayHeaderSummary(header); // Display updated summary
+                            displayHeaderSummary(); // Display updated summary
                         } else {
                             System.out.println("Course number must be entered");
                         }
@@ -70,7 +70,21 @@ public class Main {
                 case 4:
                     // Delete a student
                     if (fileInputted) {
-                        System.out.
+                        System.out.print("Enter the student ID number to delete: ");
+                        String studentID = scanner.nextLine();
+
+                        System.out.print("Enter the course number from which the student is the be dropped from: ");
+                        String courseNumber = scanner.nextLine();
+
+                        boolean studentDeleted = header.deleteStudent(courseNumber, studentID);
+
+                        if (studentDeleted) {
+                            displayHeaderSummary();
+                        } else {
+                            System.out.println("Cannot locate student");
+                        }
+                    } else {
+                        System.out.println("Input file data first");
                     }
                     break;
 
@@ -161,7 +175,8 @@ public class Main {
         return header;
     }
 
-    private static void displayHeaderSummary (Header header) {
+    private static void displayHeaderSummary () {
+        Header header = new Header();
         if (header != null) {
             System.out.println("Summary of the record:");
             System.out.println("Number of courses registered: " + header.getCourseCount());

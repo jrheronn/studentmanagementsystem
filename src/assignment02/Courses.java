@@ -91,4 +91,24 @@ public class Courses {
     public void incrementStudentCount() {
         studentCount++;
     }
+
+    public boolean removeStudent(String studentID) {
+        Students current = studentList;
+        Students previous = null;
+
+        while (current != null) {
+            if (current.getStudentID().equals(studentID)) {
+                // Remove student from course list
+                if (previous != null) {
+                    previous.setNext(current.getNext());
+                } else {
+                    studentList = current.getNext();
+                }
+                return true; // Student removed from course
+            }
+            previous = current;
+            current = current.getNext();
+        }
+        return false; // Student ID not found
+    }
 }

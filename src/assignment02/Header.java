@@ -148,4 +148,15 @@ public class Header {
 
 
     }
+
+    public boolean deleteStudent(String courseNumber, String studentID) {
+        // Locate course from course number
+        Courses course = getCourse(courseNumber);
+
+        if (course != null) {
+            // Remove student from the course's student list
+            return course.removeStudent(studentID);
+        }
+        return false;
+    }
 }
