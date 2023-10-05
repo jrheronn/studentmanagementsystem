@@ -32,7 +32,7 @@ public class Main {
                     // Read the input data
                     header = readInputFile();
                     fileInputted = true;
-                    displayHeaderSummary(); // Display header summary
+                    displayHeaderSummary(header); // Display header summary
                     break;
 
                 case 2:
@@ -41,7 +41,7 @@ public class Main {
                         System.out.print("Enter the course number to delete: ");
                         String courseNumber = scanner.next(); // Get inputted course number
                         header.deleteCourse(courseNumber);
-                        displayHeaderSummary(); // Display updated summary
+                        displayHeaderSummary(header); // Display updated summary
                     } else {
                         System.out.println("Input file data first");
                     }
@@ -58,7 +58,7 @@ public class Main {
                             String courseName = scanner.nextLine(); // Get inputted course name
 
                             header.insertCourse(courseNumber, courseName);
-                            displayHeaderSummary(); // Display updated summary
+                            displayHeaderSummary(header); // Display updated summary
                         } else {
                             System.out.println("Course number must be entered");
                         }
@@ -79,7 +79,7 @@ public class Main {
                         boolean studentDeleted = header.deleteStudent(courseNumber, studentID);
 
                         if (studentDeleted) {
-                            displayHeaderSummary();
+                            displayHeaderSummary(header);
                         } else {
                             System.out.println("Cannot locate student");
                         }
@@ -175,8 +175,7 @@ public class Main {
         return header;
     }
 
-    private static void displayHeaderSummary () {
-        Header header = new Header();
+    private static void displayHeaderSummary (Header header) {
         if (header != null) {
             System.out.println("Summary of the record:");
             System.out.println("Number of courses registered: " + header.getCourseCount());
