@@ -113,7 +113,7 @@ public class Main {
                 String[] categories = line.split("\t");
 
                 if (categories.length == 6) {
-                    String courseNumber = categories[0];
+                    String courseNumber = categories[0].replaceAll("\\s", "");
                     String courseName = categories[1];
                     String studentName = categories[2];
                     String studentID = categories[3];
@@ -146,6 +146,7 @@ public class Main {
             System.out.println("Summary of the record:");
             System.out.println("Number of courses registered: " + header.getCourseCount());
             System.out.println("Number of total students: " + header.getTotalStudentCount());
+            System.out.println();
         }
     }
 }
