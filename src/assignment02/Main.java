@@ -31,11 +31,19 @@ public class Main {
                     // Read the input data
                     header = readInputFile();
                     fileInputted = true;
-                    displayHeaderSummary(header);
+                    displayHeaderSummary(header); // Display header summary
                     break;
 
                 case 2:
                     // Delete a course
+                    if (fileInputted) {
+                        System.out.print("Enter the course number to delete: ");
+                        String courseNumber = scanner.next(); //
+                        header.deleteCourse(courseNumber);
+                        displayHeaderSummary(header); // Display updated summary
+                    } else {
+                        System.out.println("Input file data first");
+                    }
                     break;
 
                 case 3:
@@ -61,7 +69,6 @@ public class Main {
                     } else {
                         System.out.println("Input file data first");
                     }
-
                     break;
 
                 case 8:

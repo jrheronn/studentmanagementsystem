@@ -113,4 +113,33 @@ public class Header {
             }
         }
     }
+    // Case 2 Method to delete a course
+    public void deleteCourse(String courseNumber) {
+        Courses currentCourse = head;
+        Courses previousCourse = null;
+
+        // Locate the course in the doubly linked list
+        while (currentCourse != null) {
+            // Check if enter course number matches
+            if (currentCourse.getCourseNumber().equals(courseNumber)) {
+                // Move next to not point to this course
+                if (previousCourse != null) {
+                    previousCourse.setNext(currentCourse.getNext());
+                } else {
+                    // If first in the list update head to point to the next one
+                    head = currentCourse.getNext();
+                }
+                // Decrement the course count
+                decrementCourseCount();
+                return;
+            }
+            previousCourse = currentCourse;
+            currentCourse = currentCourse.getNext();
+        }
+        System.out.println("Course does not exist"); // Display if the course number is not found
+    }
+
+    private void decrementCourseCount() {
+        courseCount--;
+    }
 }
