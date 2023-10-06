@@ -56,12 +56,4 @@ public class Students {
         this.next = next;
     }
 
-    // Create add method for a new student
-    public void add(Students student) {
-        if (next == null) {
-            next = student;
-        } else {
-            next.add(student);
-        }
-    }
 }

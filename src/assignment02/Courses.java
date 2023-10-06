@@ -59,14 +59,6 @@ public class Courses {
         this.next = next;
     }
 
-    public Students getStudentList() {
-        return studentList;
-    }
-
-    public void setStudentList(Students studentList) {
-        this.studentList = studentList;
-    }
-
     public void addStudentReader(Header header, Students student) {
         if (student == null) {
             return;
@@ -143,22 +135,27 @@ public class Courses {
 
     // Case 8 to display the student list for a specific course
     public void displayCoursesStudentList() {
-        if (studentList == null) {
-            System.out.println("No students enrolled in this course.");
-        }
         Students student = studentList;
         System.out.println("The list of students enrolled in the course " + courseNumber + " are as follows:");
         System.out.println();
 
-        System.out.printf("%-20s %-20s %-30s %-50s \n", "Student's ID", "Student's Name", "Email", "Address");
+        if (studentList == null) {
+            // Print if student list is empty
+            System.out.println("No students enrolled in this course.");
+        }
+
+        // Print the column header
+        System.out.printf("%-15s %-30s %-25s %-50s \n", "Student's ID", "Student's Name", "Email", "Address");
 
         while (student != null) {
-            System.out.printf("%-20s %-20s %-30s %-50s \n",
+            // Print the student list to align with the header
+            System.out.printf("%-15s %-30s %-25s %-50s \n",
                     student.getStudentID(),
                     student.getStudentName(),
                     student.getEmail(),
                     student.getAddress()
                     );
+            // Get next student
             student = student.getNext();
         }
 

@@ -144,6 +144,7 @@ public class Header {
         return false;
     }
 
+    // Method for case 5 for adding student to a course
     public void addStudentToCourse(String courseNumberToEnroll, String studentNameEnroll, String studentIDEnroll, String studentEmailEnroll, String studentAddressEnroll) {
         // Locate course
         Courses course = getCourse(courseNumberToEnroll);
