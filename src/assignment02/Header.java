@@ -89,22 +89,6 @@ public class Header {
             currentCourse = currentCourse.getNext();
         }
     }
-
-    // Method to display student list for case 8
-    public void displayStudentList(String courseNumber) {
-        Courses currentCourse = head;
-        while (currentCourse != null) {
-            if (currentCourse.getCourseNumber().equals(courseNumber)) {
-                System.out.println("The list of students enrolled in the course " + courseNumber + " are as follows:");
-                System.out.println();
-                Students enrolledStudents = currentCourse.getStudentList();
-                // Student list needs to print in columns
-                while (enrolledStudents != null) {
-
-                }
-            }
-        }
-    }
     // Case 2 Method to delete a course
     public void deleteCourse(String courseNumber) {
         Courses currentCourse = head;

@@ -1,5 +1,7 @@
 package assignment02;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+
 // Class for course
 public class Courses {
     private String courseName;
@@ -137,5 +139,29 @@ public class Courses {
             student = student.getNext();
         }
         return null; // Student not found
+    }
+
+    // Case 8 to display the student list for a specific course
+    public void displayCoursesStudentList() {
+        if (studentList == null) {
+            System.out.println("No students enrolled in this course.");
+        }
+        Students student = studentList;
+        System.out.println("The list of students enrolled in the course " + courseNumber + " are as follows:");
+        System.out.println();
+
+        System.out.printf("%-20s %-20s %-30s %-50s \n", "Student's ID", "Student's Name", "Email", "Address");
+
+        while (student != null) {
+            System.out.printf("%-20s %-20s %-30s %-50s \n",
+                    student.getStudentID(),
+                    student.getStudentName(),
+                    student.getEmail(),
+                    student.getAddress()
+                    );
+            student = student.getNext();
+        }
+
+
     }
 }

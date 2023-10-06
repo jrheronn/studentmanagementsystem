@@ -190,9 +190,17 @@ public class Main {
                         System.out.println("Input file data first");
                         break;
                     }
-                    System.out.print("Enter the course number: ");
-                    String courseNumberStudentList = scanner.next();
-                    header.displayStudentList(courseNumberStudentList);
+                    // Prompt user for course code
+                    System.out.print("Enter the course code: ");
+                    String courseNumberForList = scanner.nextLine();
+                    
+                    Courses courseStudentList = header.getCourse(courseNumberForList);
+                    
+                    if(courseStudentList != null) {
+                        courseStudentList.displayCoursesStudentList();
+                    } else {
+                        System.out.println("Course not found.");
+                    }
                     break;
 
                 case 9:
