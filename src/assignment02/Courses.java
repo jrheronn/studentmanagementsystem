@@ -20,45 +20,37 @@ public class Courses {
         this.studentList = null;
     }
 
+    // Get course name
     public String getCourseName() {
         return courseName;
     }
 
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
-    }
+    // Get course number
     public String getCourseNumber() {
         return courseNumber;
     }
 
-    public void setCourseNumber(String courseNumber) {
-        this.courseNumber = getCourseNumber();
-    }
-
+    // Get student count.
     public int getStudentCount() {
         return studentCount;
     }
 
-    public void setStudentCount(int studentCount) {
-        this.studentCount = studentCount;
-    }
-
-    public Courses getPrevious() {
-        return previous;
-    }
-
+    // Set previous node
     public void setPrevious(Courses previous) {
         this.previous = previous;
     }
 
+    // Get next course in doubly linked list
     public Courses getNext() {
         return next;
     }
 
+    // Set next course node in doubly linked list
     public void setNext(Courses next) {
         this.next = next;
     }
 
+    // Add student when reading the input file
     public void addStudentReader(Header header, Students student) {
         if (student == null) {
             return;
@@ -82,10 +74,12 @@ public class Courses {
         header.incrementTotalStudentCount();
     }
 
+    // Increment student count by one
     public void incrementStudentCount() {
         studentCount++;
     }
 
+    // Student removed from course
     public boolean removeStudent(String studentID) {
         Students current = studentList;
         Students previous = null;
@@ -106,6 +100,7 @@ public class Courses {
         return false; // Student ID not found
     }
 
+    // Method to add student to an existing course
     public void addStudent(Students student) {
         if (student == null) {
             // Create student list if this is the first student
@@ -120,6 +115,7 @@ public class Courses {
         }
     }
 
+    // Locate student by student name
     public Students findStudentName(String studentName) {
         Students student = studentList;
 
@@ -135,7 +131,7 @@ public class Courses {
 
     // Case 8 to display the student list for a specific course
     public void displayCoursesStudentList() {
-        Students student = studentList;
+        Students currentStudent = studentList;
         System.out.println("The list of students enrolled in the course " + courseNumber + " are as follows:");
         System.out.println();
 
@@ -147,18 +143,16 @@ public class Courses {
         // Print the column header
         System.out.printf("%-15s %-30s %-25s %-50s \n", "Student's ID", "Student's Name", "Email", "Address");
 
-        while (student != null) {
+        while (currentStudent != null) {
             // Print the student list to align with the header
             System.out.printf("%-15s %-30s %-25s %-50s \n",
-                    student.getStudentID(),
-                    student.getStudentName(),
-                    student.getEmail(),
-                    student.getAddress()
+                    currentStudent.getStudentID(),
+                    currentStudent.getStudentName(),
+                    currentStudent.getEmail(),
+                    currentStudent.getAddress()
                     );
             // Get next student
-            student = student.getNext();
+            currentStudent = currentStudent.getNext();
         }
-
-
     }
 }

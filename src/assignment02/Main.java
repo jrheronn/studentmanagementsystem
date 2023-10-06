@@ -1,3 +1,11 @@
+/*
+Author Name: Joshua Hernandez
+Email: joshua.r.hernandez@okstate.edu
+Data: October 8, 2023
+Program Description: CS3353 Assignment 02
+*/
+
+
 package assignment02;
 import java.io.BufferedReader;
 import java.io.FileReader;

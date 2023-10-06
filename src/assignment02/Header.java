@@ -25,14 +25,7 @@ public class Header {
         return totalStudentCount;
     }
 
-    public Courses getHead() {
-        return head;
-    }
-
-    public Courses getTail() {
-        return tail;
-    }
-
+    // Get the course from the course number
     public Courses getCourse(String courseNumber) {
         Courses currentCourse = head;
         while (currentCourse != null) {
@@ -44,14 +37,17 @@ public class Header {
         return null; // course does not exist
     }
 
+    // Increment the total student count by one
     public void incrementTotalStudentCount() {
         totalStudentCount++;
     }
 
+    // Increment course count by one
     public void incrementCourseCount() {
         courseCount++;
     }
 
+    // Add new course to the doubly linked list when reading the input file
     public void addCourse(Courses course) {
         // Check for same course number
         Courses existingCourse = getCourse(course.getCourseNumber());
@@ -115,10 +111,12 @@ public class Header {
         System.out.println("Course does not exist"); // Display if the course number is not found
     }
 
+    // Decrement course count by one
     private void decrementCourseCount() {
         courseCount--;
     }
 
+    // Insert new course into the doubly linked list
     public void insertCourse(String courseNumber, String courseName) {
         Courses course = new Courses(courseNumber, courseName, 0);
 

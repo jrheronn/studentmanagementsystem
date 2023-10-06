@@ -16,36 +16,21 @@ public class Students {
         this.next = null;
     }
 
+    // Getters and setters
     public String getStudentName() {
         return studentName;
-    }
-
-    public void setStudentName(String studentName) {
-        this.studentName = studentName;
     }
 
     public String getStudentID() {
         return studentID;
     }
 
-    public void getStudentID(String studentID) {
-        this.studentID = studentID;
-    }
-
     public String getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
     public String getAddress() {
         return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 
     public Students getNext() {
