@@ -5,7 +5,6 @@ Data: October 8, 2023
 Program Description: CS3353 Assignment 02
 */
 
-
 package assignment02;
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,7 +16,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         Header header = null;
 
-        boolean fileInputted = false;
+        boolean fileInputted = false; // Boolean for if fileInput_1.txt has been inputted.
 
         int option;
         do {
@@ -270,6 +269,7 @@ public class Main {
         return header;
     }
 
+    // Display the header summary of the number of courses and number of students enrolled
     private static void displayHeaderSummary (Header header) {
         if (header != null) {
             System.out.println("Summary of the record:");
