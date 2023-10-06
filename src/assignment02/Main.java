@@ -220,7 +220,7 @@ public class Main {
 
 
             }
-        } while (option != 9);
+        } while (option != 9); // Only terminate when 9 is the option
     }
 
     private static Header readInputFile() {
